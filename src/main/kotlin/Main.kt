@@ -1,4 +1,8 @@
 import puzzles.year2023.Day1
+import puzzles.year2023.Day2
+import puzzles.year2023.Day3
+import puzzles.year2023.Day4
+import puzzles.year2023.Day5
 
 fun main(args: Array<String>) {
     // Try adding program arguments via Run/Debug configuration.
@@ -7,4 +11,13 @@ fun main(args: Array<String>) {
 
     val day1 = Day1()
     day1.displayResult()
+
+    val day2 = Day2()
+    day2.displayResult()
+
+    val day3 = Day3()
+    day3.displayResult()
+
+    Day4().displayResult()
+    Day5().displayResult()
 }
