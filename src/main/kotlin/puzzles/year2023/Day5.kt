@@ -22,7 +22,6 @@ class Day5: Puzzle(2023, 5, "If You Give A Seed A Fertilizer") {
 
         val rangeMappers = getRangeMappers(input)
 
-
         var ranges = seedRanges
         for (rangeMapper in rangeMappers) {
             ranges = rangeMapper.transformRanges(ranges)
