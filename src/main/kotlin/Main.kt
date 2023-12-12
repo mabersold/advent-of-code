@@ -1,4 +1,5 @@
 import puzzles.year2023.Day1
+import puzzles.year2023.Day10
 import puzzles.year2023.Day2
 import puzzles.year2023.Day3
 import puzzles.year2023.Day4
@@ -22,4 +23,5 @@ fun main(args: Array<String>) {
     Day7().displayResult()
     Day8().displayResult()
     Day9().displayResult()
+    Day10().displayResult()
 }
