@@ -6,6 +6,7 @@ import puzzles.year2023.Day5
 import puzzles.year2023.Day6
 import puzzles.year2023.Day7
 import puzzles.year2023.Day8
+import puzzles.year2023.Day9
 
 fun main(args: Array<String>) {
     // Try adding program arguments via Run/Debug configuration.
@@ -20,4 +21,5 @@ fun main(args: Array<String>) {
     Day6().displayResult()
     Day7().displayResult()
     Day8().displayResult()
+    Day9().displayResult()
 }
