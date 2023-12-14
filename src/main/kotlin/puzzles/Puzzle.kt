@@ -14,4 +14,8 @@ abstract class Puzzle(private val year: Int, private val day: Int, private val t
         val input = this::class.java.getResource("/puzzle-input/$year/day$day-$part.txt")?.readText()
         return input?.split("\n") ?: emptyList()
     }
+
+    protected fun getInputAsSingleString(part: Int): String {
+        return this::class.java.getResource("/puzzle-input/$year/day$day-$part.txt")?.readText() ?: ""
+    }
 }
