@@ -11,20 +11,28 @@ class Day13: Puzzle(2023, 13, "Point of Incidence") {
         return patterns.sumOf { p ->
             val pattern = p.split("\n")
 
-            pattern.getAnswer()
+            pattern.getPart1Answer()
         }
     }
 
     override fun part2(): Any {
-        TODO("Not yet implemented")
+        val input = getInputAsSingleString(1)
+
+        val patterns = input.split("\n\n")
+
+        return patterns.sumOf { p ->
+            val pattern = p.split("\n")
+
+            pattern.getPart2Answer()
+        }
     }
 
     private fun List<String>.findReflectedRows(): List<Int> {
         val reflectedRowNumbers = mutableListOf<Int>()
 
-        for (c in 0..<this.size - 1) {
-            if (this[c] == this[c+1]) {
-                reflectedRowNumbers.add(c)
+        for (r in 0..<this.size - 1) {
+            if (this[r] == this[r+1]) {
+                reflectedRowNumbers.add(r)
             }
         }
 
@@ -43,18 +51,30 @@ class Day13: Puzzle(2023, 13, "Point of Incidence") {
         return reflectedColumnNumbers
     }
 
-    private fun List<String>.getAnswer(): Int {
-        val reflectedRows = this.findReflectedRows()
-        val reflectedColumns = this.findReflectedColumns()
-
-        reflectedRows.forEach { row ->
+    private fun List<String>.getPart1Answer(): Int {
+        this.findReflectedRows().forEach { row ->
             if (this.hasPerfectRowReflection(row))
                 return 100 * (row + 1)
         }
 
-        reflectedColumns.forEach { col ->
+        this.findReflectedColumns().forEach { col ->
             if (this.hasPerfectColumnReflection(col))
                 return col + 1
+        }
+
+        return 0
+    }
+
+    private fun List<String>.getPart2Answer(): Int {
+        // Rows
+        for (r in 0..<this.size - 1) {
+            if (this.hasAlmostPerfectRowReflection(r))
+                return 100 * (r + 1)
+        }
+
+        for (c in 0..<this.first().length - 1) {
+            if (this.hasAlmostPerfectColumnReflection(c))
+                return c + 1
         }
 
         return 0
@@ -89,5 +109,65 @@ class Day13: Puzzle(2023, 13, "Point of Incidence") {
         }
 
         return true
+    }
+
+    private fun List<String>.hasAlmostPerfectRowReflection(rowNumber: Int): Boolean {
+        var lesser = rowNumber
+        var greater = rowNumber + 1
+
+        var totalOffByOne = 0
+        var totalUnequal = 0
+
+        while (lesser >= 0 && greater <= this.size - 1) {
+            // Get total number of differences between the two strings
+            var totalDifferences = 0
+            for (i in 0..<this[lesser].length) {
+                if (this[lesser][i] != this[greater][i]) {
+                    totalDifferences++
+                }
+            }
+            if (totalDifferences == 1) {
+                totalOffByOne++
+            } else if (totalDifferences > 1) {
+                totalUnequal++
+            }
+
+            lesser--
+            greater++
+        }
+
+        return totalOffByOne == 1 && totalUnequal == 0
+    }
+
+    private fun List<String>.hasAlmostPerfectColumnReflection(columnNumber: Int): Boolean {
+        var lesser = columnNumber
+        var greater = columnNumber + 1
+
+        var totalOffByOne = 0
+        var totalUnequal = 0
+
+        while (lesser >= 0 && greater <= this.first().length - 1) {
+            // Get total number of differences between the two strings
+            var totalDifferences = 0
+
+            val left = this.map { it[lesser] }
+            val right = this.map { it[greater] }
+
+            for (i in left.indices) {
+                if (left[i] != right[i]) {
+                    totalDifferences++
+                }
+            }
+            if (totalDifferences == 1) {
+                totalOffByOne++
+            } else if (totalDifferences > 1) {
+                totalUnequal++
+            }
+
+            lesser--
+            greater++
+        }
+
+        return totalOffByOne == 1 && totalUnequal == 0
     }
 }
