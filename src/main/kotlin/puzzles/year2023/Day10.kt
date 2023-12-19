@@ -1,5 +1,6 @@
 package puzzles.year2023
 
+import models.Direction
 import puzzles.Puzzle
 
 class Day10: Puzzle(2023, 10, "Pipe Maze") {
@@ -261,11 +262,4 @@ class Day10: Puzzle(2023, 10, "Pipe Maze") {
         val stepsFromStart: Int,
         val coordinates: Pair<Int, Int>
     )
-
-    enum class Direction {
-        RIGHT,
-        LEFT,
-        DOWN,
-        UP
-    }
 }
