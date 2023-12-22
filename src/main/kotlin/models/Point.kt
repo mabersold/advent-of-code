@@ -13,4 +13,10 @@ data class Point(val row: Int, val column: Int) {
     fun isInBounds(maxRow: Int, maxColumn: Int, minRow: Int = 0, minColumn: Int = 0): Boolean {
         return row in minRow..maxRow && column in minColumn..maxColumn
     }
+
+    operator fun plus(other: Point): Point =
+        Point(row + other.row, column + other.column)
+
+    operator fun times(amount: Int): Point =
+        Point(row * amount, column * amount)
 }
